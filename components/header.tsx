@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 
-export const Header = () => {
+const Header = () => {
   return (
     <header>
       <Button>Connexion</Button>
@@ -8,3 +8,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;
