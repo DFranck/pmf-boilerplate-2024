@@ -36,7 +36,28 @@ export const POST = async (req: Request) => {
     },
   });
 
-  console.log(newuser);
+  const transporter = nodemailer.createTransport({
+    host: "in-v3.mailjet.com",
+    port: 587,
+    auth: {
+      user: process.env.MAILJET_API_KEY,
+      pass: process.env.MAILJET_API_SECRET,
+    },
+  });
+
+  const mailOptions = {
+    from: "franckdufournet@hotmail.fr",
+    to: email,
+    subject: "Verify your email",
+    text: `Please click on the following link to verify your email: http://localhost:3000/api/verify?token=${verificationToken}`,
+  };
+
+  transporter.sendMail(mailOptions, (error: any, info: any) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("Email sent: " + info.response);
+  });
 
   return new Response("User created", { status: 200 });
 };
