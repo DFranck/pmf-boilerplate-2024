@@ -12,8 +12,6 @@ export const GET = async (req: Request) => {
       verificationToken: token,
     },
   });
-  console.log("count");
-
   if (!user) {
     return new Response("No user corresponding", { status: 400 });
   }
