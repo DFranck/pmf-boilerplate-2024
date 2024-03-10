@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
+import Link from "next/link";
 const SignupForm = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -77,6 +78,7 @@ const SignupForm = () => {
             </FormItem>
           )}
         />
+        <Link href="/forgot-password">Forgot Password</Link>
         <Button type="submit">Submit</Button>
       </form>
     </Form>
