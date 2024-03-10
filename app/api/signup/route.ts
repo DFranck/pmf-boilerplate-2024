@@ -1,8 +1,8 @@
+import transporter from "@/lib/nodemailer";
 import prisma from "@/lib/prisma";
 import { signupSchema } from "@/lib/schema";
 import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
-import nodemailer from "nodemailer";
 export const POST = async (req: Request) => {
   const zodVerif = signupSchema.safeParse(await req.json());
   if (!zodVerif.success) {
@@ -36,20 +36,11 @@ export const POST = async (req: Request) => {
     },
   });
 
-  const transporter = nodemailer.createTransport({
-    host: "in-v3.mailjet.com",
-    port: 587,
-    auth: {
-      user: process.env.MAILJET_API_KEY,
-      pass: process.env.MAILJET_API_SECRET,
-    },
-  });
-
   const mailOptions = {
-    from: "franckdufournet@hotmail.fr",
+    from: process.env.MAIL_FROM,
     to: email,
     subject: "Verify your email",
-    text: `Please click on the following link to verify your email: http://localhost:3000/api/verify?token=${verificationToken}`,
+    text: `Please click on the following link to verify your email: ${process.env.HOST_URL}/api/verify?token=${verificationToken}`,
   };
 
   transporter.sendMail(mailOptions, (error: any, info: any) => {
@@ -58,6 +49,6 @@ export const POST = async (req: Request) => {
     }
     console.log("Email sent: " + info.response);
   });
-
+  console.log("newuser", newuser);
   return new Response("User created", { status: 200 });
 };
