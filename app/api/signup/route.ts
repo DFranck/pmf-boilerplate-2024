@@ -47,7 +47,7 @@ export const POST = async (req: Request) => {
     if (error) {
       console.log(error);
     }
-    console.log("Email sent: " + info.response + "to:" + email);
+    console.log("Email sent: " + info.response + " to:" + email);
   });
   console.log("newuser", newuser);
   return new Response("User created", { status: 200 });

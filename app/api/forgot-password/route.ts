@@ -24,13 +24,13 @@ export const POST = async (req: Request) => {
   const resetTokenExpires = new Date();
   resetTokenExpires.setHours(resetTokenExpires.getHours() + 1);
 
-  const updateUser = await prisma.user.update({
+  await prisma.user.update({
     where: {
       email,
     },
     data: {
-      resetToken,
-      resetTokenExpires,
+      resetToken: resetToken,
+      resetTokenExpires: resetTokenExpires,
     },
   });
 

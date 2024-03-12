@@ -1,11 +1,10 @@
 import ResetPasswordForm from "@/components/ResetPasswordForm";
-
-const ResetPasswordPage = ({ token }: { token: string }) => {
+const ResetPassword = async () => {
   return (
     <section className="flex min-h-screen flex-col items-center justify-center">
-      <ResetPasswordForm token={token} />
+      <ResetPasswordForm />
     </section>
   );
 };
 
-export default ResetPasswordPage;
+export default ResetPassword;
