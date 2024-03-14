@@ -2,12 +2,12 @@
 
 import { signupSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
-import Link from "next/link";
 const SignupForm = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -43,9 +43,9 @@ const SignupForm = () => {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Surnom</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your username" {...field} />
+                <Input placeholder="Entrer votre surnom" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -57,7 +57,11 @@ const SignupForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="Enter your Email" {...field} />
+                <Input
+                  type="email"
+                  placeholder="Entrer votre Email"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -71,15 +75,20 @@ const SignupForm = () => {
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="Enter your Password"
+                  placeholder="Entrer votre Password"
                   {...field}
                 />
               </FormControl>
             </FormItem>
           )}
         />
-        <Link href="/forgot-password">Forgot Password</Link>
         <Button type="submit">Submit</Button>
+        <Link
+          className="text-blue-500 w-full text-sm text-right"
+          href="/forgot-password"
+        >
+          Password oublié?
+        </Link>
       </form>
     </Form>
   );

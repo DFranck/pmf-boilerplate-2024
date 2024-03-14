@@ -7,8 +7,6 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   const { data: session } = useSession();
-  console.log(session?.user);
-
   return (
     <header className=" p-5 border-b-2 border-black">
       <div className="flex justify-between max-w-7xl mx-auto">
@@ -26,12 +24,13 @@ const Header = () => {
           {session?.user ? (
             <Button onClick={() => signOut()}>Deconnexion</Button>
           ) : (
-            <Button>Connexion</Button>
+            <Button asChild>
+              <Link href="/api/auth/signin">Connexion</Link>
+            </Button>
           )}
         </div>
       </div>
     </header>
   );
 };
-
 export default Header;
