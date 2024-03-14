@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "./prisma";
 import { signinSchema } from "./schema";
 const authOption = {
-  adatpers: [PrismaAdapter(prisma)],
+  adatper: PrismaAdapter(prisma),
   pages: {
     signIn: "/signin",
   },
@@ -51,8 +51,18 @@ const authOption = {
     }),
   ],
   callbacks: {
-    async session({ session, user }: any) {
-      session.user.username = user.username;
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.id = user.id;
+        token.username = user.username;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }: any) {
+      session.user.id = token.id;
+      session.user.email = token.email;
+      session.user.username = token.username;
       return session;
     },
   },
