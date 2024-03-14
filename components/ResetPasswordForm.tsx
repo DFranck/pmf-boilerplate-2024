@@ -1,29 +1,19 @@
 "use client";
 
-import { verifyNewPasswordSchema } from "@/lib/schema";
+import { verifyNewPasswordSchema, verifyTokenSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { verifyTokenSchema } from "../lib/schema";
 import { Button } from "./ui/button";
-import { Form, FormField, FormItem, FormLabel } from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
+import { useToast } from "./ui/use-toast";
 
 const ResetPasswordForm = () => {
+  const { toast } = useToast();
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const [token, setToken] = useState<string>("");
-  useEffect(() => {
-    const tokenParams = verifyTokenSchema.safeParse({
-      token: searchParams.get("token"),
-    });
-    if (!tokenParams.success) {
-      return;
-    }
-    setToken(tokenParams.data.token);
-  }, [searchParams]);
-
   const form = useForm<z.infer<typeof verifyNewPasswordSchema>>({
     resolver: zodResolver(verifyNewPasswordSchema),
     defaultValues: {
@@ -31,48 +21,83 @@ const ResetPasswordForm = () => {
       confirmNewPassword: "",
     },
   });
-  const onSubmit = async (value: z.infer<typeof verifyNewPasswordSchema>) => {
-    const requestBody = {
-      ...value,
-      token,
-    };
+  async function onSubmit(value: z.infer<typeof verifyNewPasswordSchema>) {
+    const tokenVerif = verifyTokenSchema.safeParse({
+      token: searchParams.get("token"),
+    });
+    if (!tokenVerif.success) {
+      toast({
+        title: "Error",
+        description: "Aucun token disponible",
+        variant: "destructive",
+      });
+      return;
+    }
+    const token = tokenVerif.data.token;
+
     const res = await fetch("/api/reset-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({
+        ...value,
+        token,
+      }),
     });
+    const data = await res.json();
     if (!res.ok) {
-      return Response.json({ error: "Response POST is not ok" });
+      toast({
+        title: "Error",
+        description: data.message,
+        variant: "destructive",
+      });
     } else {
-      return Response.json({ success: "Response POST is ok" });
+      toast({
+        title: "Success",
+        description: data.message,
+        variant: "success",
+      });
+      router.push("/signin");
     }
-  };
+  }
 
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, (errors) => {
+          const errorMessage = errors.confirmNewPassword?.message;
+          if (errorMessage) {
+            toast({
+              title: "Erreur",
+              description: errorMessage,
+              variant: "destructive",
+            });
+          }
+        })}
         className="flex flex-col max-w-md space-y-4 justify-center items-center bg-gray-100 rounded-lg p-8 "
       >
         <FormField
-          control={form.control}
           name={"newPassword"}
+          control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>New Password</FormLabel>
-              <Input type="password" {...field} />
+              <FormLabel>Nouveau Password</FormLabel>
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
             </FormItem>
           )}
         />
         <FormField
-          control={form.control}
           name={"confirmNewPassword"}
+          control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Confirm new password</FormLabel>
-              <Input type="password" {...field} />
+              <FormControl>
+                <Input type="password" {...field} />
+              </FormControl>
             </FormItem>
           )}
         />

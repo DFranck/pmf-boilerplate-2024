@@ -3,12 +3,16 @@
 import { signupSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
+import { useToast } from "./ui/use-toast";
 const SignupForm = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -18,7 +22,6 @@ const SignupForm = () => {
     },
   });
   async function onSubmit(values: z.infer<typeof signupSchema>) {
-    console.log(values);
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: {
@@ -26,10 +29,21 @@ const SignupForm = () => {
       },
       body: JSON.stringify(values),
     });
+    const data = await res.json();
     if (!res.ok) {
-      return Response.json({ error: "Response POST is not ok" });
+      console.log(data.message);
+      toast({
+        description: data.message,
+        title: "Error",
+        variant: "destructive",
+      });
     } else {
-      return Response.json({ success: "Response POST is ok" });
+      toast({
+        description: data.message,
+        title: "Success",
+        variant: "success",
+      });
+      router.push("/signin");
     }
   }
   return (

@@ -35,8 +35,8 @@ export const verifyNewPasswordSchema = z
       .min(11, "le mot de passe doit comporter au moins 11 caractères"),
   })
   .refine((data) => data.newPassword === data.confirmNewPassword, {
+    path: ["confirmNewPassword"],
     message: "les mots de passe ne sont pas identiques",
-    path: ["confirmPassword"],
   });
 
 export const resetPasswordSchema = z.object({

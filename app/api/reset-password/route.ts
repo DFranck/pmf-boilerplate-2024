@@ -7,16 +7,24 @@ export const POST = async (req: Request) => {
     return new Response(zodVerif.error.message, { status: 400 });
   }
   const { newPassword, token } = zodVerif.data;
+  console.log(newPassword, token);
+
   const user = await prisma.user.findUnique({
     where: {
       resetToken: token,
     },
   });
   if (!user) {
-    return new Response("No user corresponding", { status: 400 });
+    console.log("user not found");
+    return new Response(JSON.stringify({ message: "User not found" }), {
+      status: 404,
+    });
   }
   if (!user.resetTokenExpires || user.resetTokenExpires < new Date()) {
-    return new Response("Invalid or expired token", { status: 400 });
+    console.log("token expired");
+    return new Response(JSON.stringify({ message: "Token expired" }), {
+      status: 400,
+    });
   }
   const hashedPassword = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({
@@ -29,5 +37,8 @@ export const POST = async (req: Request) => {
       password: hashedPassword,
     },
   });
-  return new Response("Password updated", { status: 200 });
+  return new Response(
+    JSON.stringify({ message: "Password reset successfully" }),
+    { status: 200 }
+  );
 };

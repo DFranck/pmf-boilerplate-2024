@@ -6,18 +6,22 @@ import { randomBytes } from "crypto";
 export const POST = async (req: Request) => {
   const zodVerif = signupSchema.safeParse(await req.json());
   if (!zodVerif.success) {
+    console.log("Error: ", zodVerif.error);
     return new Response(zodVerif.error.message, { status: 400 });
   }
   const { username, email, password } = zodVerif.data;
-  const existingUser = await prisma.user.findUnique({
+  const existingUser = await prisma.user.findFirst({
     where: {
-      username,
-      email,
+      OR: [{ email }, { username }],
     },
   });
   if (existingUser) {
-    return new Response("User already exists", { status: 400 });
+    console.log("User already exists");
+    return new Response(JSON.stringify({ message: "User already exists" }), {
+      status: 409,
+    });
   }
+
   const hashedPassword = await bcrypt.hash(password, 10);
   const generateVerificationToken = () => {
     return randomBytes(32).toString("hex");
@@ -50,5 +54,7 @@ export const POST = async (req: Request) => {
     console.log("Email sent: " + info.response + " to:" + email);
   });
   console.log("newuser", newuser);
-  return new Response("User created", { status: 200 });
+  return new Response(JSON.stringify({ message: `User ${username} created` }), {
+    status: 200,
+  });
 };

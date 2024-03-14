@@ -1,13 +1,17 @@
 "use client";
 import { forgotPasswordSchema } from "@/lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
+import { useToast } from "./ui/use-toast";
 
 const ForgotPasswordForm = () => {
+  const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
@@ -23,9 +27,18 @@ const ForgotPasswordForm = () => {
       body: JSON.stringify(value),
     });
     if (!res.ok) {
-      return Response.json({ error: "Response POST is not ok" });
+      toast({
+        title: "Error",
+        description: "Email not found",
+        variant: "destructive",
+      });
     } else {
-      return Response.json({ success: "Response POST is ok" });
+      toast({
+        title: "Success",
+        description: "Email sent, check your SPAM!",
+        variant: "success",
+      });
+      router.push("/");
     }
   }
   return (
