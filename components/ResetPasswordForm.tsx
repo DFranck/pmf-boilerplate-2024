@@ -35,7 +35,7 @@ const ResetPasswordForm = () => {
     }
     const token = tokenVerif.data.token;
 
-    const res = await fetch("/api/reset-password", {
+    const res = await fetch("/api/auth/reset-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

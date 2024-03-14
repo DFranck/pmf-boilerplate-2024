@@ -20,7 +20,15 @@ const Header = () => {
           />
         </Link>
         <div className="flex justify-center items-center gap-5">
-          {session?.user && <p>Bonjour {session.user.username}</p>}
+          {session?.user && (
+            <Link href="/user/profile">
+              Bonjour{" "}
+              <b>
+                {session.user.username.slice(0, 1).toUpperCase() +
+                  session.user.username.slice(1)}
+              </b>
+            </Link>
+          )}
           {session?.user ? (
             <Button onClick={() => signOut()}>Deconnexion</Button>
           ) : (
