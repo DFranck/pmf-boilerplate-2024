@@ -10,6 +10,13 @@ export const signupSchema = z.object({
     .min(11, "le mot de passe doit comporter au moins 11 caractères"),
 });
 
+export const signinSchema = z.object({
+  email: z.string().email("l'email n'est pas valide"),
+  password: z
+    .string()
+    .min(11, "le mot de passe doit comporter au moins 11 caractères"),
+});
+
 export const forgotPasswordSchema = z.object({
   email: z.string().email("l'email n'est pas valide"),
 });
