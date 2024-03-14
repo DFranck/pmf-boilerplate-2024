@@ -42,6 +42,7 @@ const authOption = {
         } else {
           const logUser = {
             id: user.id.toString(),
+            isVerified: user.isVerified,
             username: user.username,
             email: user.email,
           };
@@ -54,6 +55,7 @@ const authOption = {
     async jwt({ token, user }: any) {
       if (user) {
         token.id = user.id;
+        token.isVerified = user.isVerified;
         token.username = user.username;
         token.email = user.email;
       }
@@ -61,6 +63,7 @@ const authOption = {
     },
     async session({ session, token }: any) {
       session.user.id = token.id;
+      session.user.isVerified = token.isVerified;
       session.user.email = token.email;
       session.user.username = token.username;
       return session;
