@@ -96,13 +96,13 @@ const SignupForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
         <Link
-          className="text-blue-500 w-full text-sm text-right"
-          href="/forgot-password"
+          className="text-gray-500 w-full text-sm text-right"
+          href="/api/auth/signin"
         >
-          Password oublié?
+          Already have an account? <b>Sign in</b>
         </Link>
+        <Button type="submit">SignUp</Button>
       </form>
     </Form>
   );

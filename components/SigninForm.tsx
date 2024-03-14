@@ -75,12 +75,18 @@ const SigninForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
         <Link
           className="text-blue-500 w-full text-sm text-right"
           href="/forgot-password"
         >
           Password oublié?
+        </Link>
+        <Button type="submit">Submit</Button>
+        <Link
+          className="text-gray-500 w-full text-sm text-right"
+          href="/signup"
+        >
+          Create an account <b className="text-blue-500">Signup now</b>
         </Link>
       </form>
     </Form>
