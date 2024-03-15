@@ -1,59 +1,35 @@
-import prisma from "@/lib/prisma";
-import { stripe } from "@/lib/stripe";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client";
+import { useSession } from "next-auth/react";
+import React from "react";
 import { Button } from "./ui/button";
-const BuyButton = () => {
-  return (
-    <Button
-      formAction={async () => {
-        "use server";
-        const authSession = await getServerSession();
-        console.log(authSession);
-        const user = await prisma.user.findUnique({
-          where: {
-            id: authSession?.user.id ?? "",
-          },
-          select: {
-            stripeCustomerId: true,
-          },
-        });
-        console.log(user);
 
-        const stripeCustomerId = user?.stripeCustomerId ?? undefined;
-        console.log(stripeCustomerId);
+const BuyButton: React.FC = () => {
+  const { data: session } = useSession();
+  const handleBuy = async () => {
+    const authUser = session?.user;
+    try {
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ authUser }),
+      });
+      const session = await res.json();
+      if (session.url) {
+        window.location.href = session.url;
+      } else {
+        console.error("La session Stripe n’a pas retourné d’URL.");
+      }
+    } catch (error) {
+      console.error(
+        "Erreur lors de la création de la session de paiement Stripe:",
+        error
+      );
+    }
+  };
 
-        const session = await stripe.checkout.sessions.create({
-          customer: stripeCustomerId,
-          mode: "subscription",
-          payment_method_types: ["card", "link"],
-          line_items: [
-            {
-              price:
-                process.env.NODE_ENV === "development"
-                  ? "price_1OuSHHP3QwKsVzo0FpZ5ZnAL"
-                  : "",
-            },
-          ],
-          success_url: `${window.location.origin}/success`,
-          cancel_url: `${window.location.origin}/cancel`,
-        });
-        console.log(session);
-
-        if (!session.url) {
-          return new Response(
-            JSON.stringify({ message: "Something went wrong" }),
-            { status: 500 }
-          );
-        }
-        console.log(session.url);
-
-        redirect(session.url);
-      }}
-    >
-      Buy
-    </Button>
-  );
+  return <Button onClick={handleBuy}>Acheter</Button>;
 };
 
 export default BuyButton;
