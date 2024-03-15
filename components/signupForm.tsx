@@ -29,7 +29,9 @@ const SignupForm = () => {
       },
       body: JSON.stringify(values),
     });
+    console.log(res);
     const data = await res.json();
+
     if (!res.ok) {
       console.log(data.message);
       toast({

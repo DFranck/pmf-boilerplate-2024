@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -23,5 +23,12 @@ model User {
   // passwordReset
   resetToken String? @unique
   resetTokenExpires DateTime?
+  // payment
+  stripeCustomerId String?
+  plan UserPlan @default(FREE)
+}
 
+enum UserPlan {
+  FREE
+  SUPPORTER
 }

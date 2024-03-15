@@ -1,3 +1,4 @@
+import BuyButton from "@/components/BuyButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -8,6 +9,7 @@ export default function Home() {
       <Button asChild>
         <Link href="/signup">Commencer</Link>
       </Button>
+      <BuyButton />
     </section>
   );
 }
