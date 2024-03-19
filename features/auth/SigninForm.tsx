@@ -7,10 +7,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "./ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
-import { Input } from "./ui/input";
-import { useToast } from "./ui/use-toast";
+import { Button } from "../../components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { useToast } from "../../components/ui/use-toast";
 const SigninForm = () => {
   const { toast } = useToast();
   const router = useRouter();
@@ -77,14 +83,14 @@ const SigninForm = () => {
         />
         <Link
           className="text-blue-500 w-full text-sm text-right"
-          href="/forgot-password"
+          href="/auth/forgot-password"
         >
           Password oublié?
         </Link>
         <Button type="submit">Submit</Button>
         <Link
           className="text-gray-500 w-full text-sm text-right"
-          href="/signup"
+          href="/auth/signup"
         >
           Create an account <b className="text-blue-500">Signup now</b>
         </Link>

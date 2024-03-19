@@ -59,7 +59,7 @@ export const POST = async (req: Request) => {
       from: process.env.MAIL_FROM,
       to: email,
       subject: "Verify your email",
-      text: `Please click on the following link to verify your email: ${process.env.HOST_URL}/api/verify?token=${verificationToken}`,
+      text: `Please click on the following link to verify your email: ${process.env.HOST_URL}/api/auth/verify?token=${verificationToken}`,
     };
 
     transporter.sendMail(mailOptions, (error: any, info: any) => {

@@ -6,10 +6,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "./ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
-import { Input } from "./ui/input";
-import { useToast } from "./ui/use-toast";
+import { Button } from "../../components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { useToast } from "../../components/ui/use-toast";
 const SignupForm = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -45,7 +51,7 @@ const SignupForm = () => {
         title: "Success",
         variant: "success",
       });
-      router.push("/signin");
+      router.push("/auth/signin");
     }
   }
   return (

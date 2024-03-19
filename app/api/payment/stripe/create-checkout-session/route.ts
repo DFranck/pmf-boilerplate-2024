@@ -3,19 +3,25 @@ import { stripe } from "@/lib/stripe";
 export const POST = async (req: Request) => {
   console.log("Checkout session called");
   const body = await req.json();
-  const userId = parseInt(body.authUser.id);
+  let stripeCustomerId = undefined;
 
-  const user = await prisma.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      stripeCustomerId: true,
-    },
-  });
+  if (body.authUser) {
+    const userId = parseInt(body.authUser.id);
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        stripeCustomerId: true,
+      },
+    });
+    stripeCustomerId = user?.stripeCustomerId;
+  }
+
   try {
     const stripSession = await stripe.checkout.sessions.create({
-      customer: user?.stripeCustomerId ?? undefined,
+      customer: stripeCustomerId ?? undefined,
       payment_method_types: ["card"],
       mode: "payment",
       line_items: [
@@ -27,10 +33,11 @@ export const POST = async (req: Request) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: "http://localhost:3000/subscribe/success",
+      cancel_url: "http://localhost:3000/subscribe/cancel",
     });
     console.log(stripSession.url);
+
     return new Response(JSON.stringify(stripSession));
   } catch (error) {
     const err = error as Error;

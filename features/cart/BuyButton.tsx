@@ -1,23 +1,25 @@
 "use client";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React from "react";
-import { Button } from "./ui/button";
+import { Button } from "../../components/ui/button";
 
 const BuyButton: React.FC = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const handleBuy = async () => {
     const authUser = session?.user;
     try {
-      const res = await fetch("/api/create-checkout-session", {
+      const res = await fetch("/api/payment/stripe/create-checkout-session", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ authUser }),
       });
-      const session = await res.json();
-      if (session.url) {
-        window.location.href = session.url;
+      const stripSession = await res.json();
+      if (stripSession.url) {
+        router.push(stripSession.url);
       } else {
         console.error("La session Stripe n’a pas retourné d’URL.");
       }

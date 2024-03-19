@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
     from: process.env.MAIL_FROM,
     to: email,
     subject: "Réinitialiser votre mot de passe",
-    text: `${process.env.HOST_URL}/reset-password?token=${resetToken}`,
+    text: `${process.env.HOST_URL}/auth/reset-password?token=${resetToken}`,
   };
 
   transporter

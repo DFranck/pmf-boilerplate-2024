@@ -1,4 +1,3 @@
-import BuyButton from "@/components/BuyButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 export default async function Home() {
@@ -6,9 +5,12 @@ export default async function Home() {
     <section className="flex min-h-screen flex-col items-center justify-center">
       <h1>Home content</h1>
       <Button asChild>
-        <Link href="/signup">Commencer</Link>
+        <Link href="/auth/signup">Commencer</Link>
       </Button>
-      <BuyButton />
+
+      <Button asChild>
+        <Link href="/subscribe">Souscription</Link>
+      </Button>
     </section>
   );
 }

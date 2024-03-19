@@ -6,7 +6,7 @@ import { signinSchema } from "./schema";
 const authOption = {
   adatper: PrismaAdapter(prisma),
   pages: {
-    signIn: "/signin",
+    signIn: "/auth/signin",
   },
 
   providers: [

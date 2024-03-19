@@ -1,7 +1,6 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Provider from "@/components/Provider";
-import { Toaster } from "@/components/ui/toaster";
+import Providers from "@/app/Providers";
+import Footer from "@/features/layout/Footer";
+import Header from "@/features/layout/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -20,12 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>
+        <Providers>
           <Header />
           <main>{children}</main>
           <Footer />
-        </Provider>
-        <Toaster />
+        </Providers>
       </body>
     </html>
   );

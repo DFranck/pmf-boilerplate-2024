@@ -1,4 +1,4 @@
-import SignupForm from "@/components/SignupForm";
+import SignupForm from "@/features/auth/SignupForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 const Signup = async () => {
