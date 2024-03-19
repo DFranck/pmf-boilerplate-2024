@@ -1,6 +1,7 @@
-import Providers from "@/app/Providers";
+import Providers from "@/app/providers";
 import Footer from "@/features/layout/Footer";
 import Header from "@/features/layout/Header";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -18,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <Providers>
           <Header />
-          <main>{children}</main>
+          {children}
           <Footer />
         </Providers>
       </body>
