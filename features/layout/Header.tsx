@@ -15,12 +15,12 @@ import { ModeToggle } from "../theme/ModeToggle";
 const Header = () => {
   const { data: session } = useSession();
   return (
-    <header className=" p-5 border-b-2 border-black">
+    <header className=" p-2 border-b-2 border-primary">
       <div className="flex justify-between max-w-7xl mx-auto">
-        <Link className="rounded-full" href="/">
+        <Link className="rounded-full hover:opacity-80" href="/">
           <Image
             className="rounded-full"
-            src="/next.svg"
+            src="/icon.png"
             alt="logo"
             width={75}
             height={75}
@@ -32,7 +32,7 @@ const Header = () => {
           {session?.user ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Button asChild>
+                <Button variant={"default"} asChild>
                   <Link href="/user/profile">
                     Bonjour{" "}
                     <b>
