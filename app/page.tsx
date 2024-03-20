@@ -1,6 +1,7 @@
+import FeaturesSection from "@/components/FeaturesSection";
 import { HeroBanner } from "@/components/HeroBanner";
-import HomeFeaturesPreview from "@/components/HomeFeaturesPreview";
 import { InfiniteMovingCardsDemo } from "@/components/InfiniteMovingCards";
+import { TypewriterEffectSmoothDemo } from "@/components/TypewriterEffectSmooth";
 import Main from "@/features/layout/Main";
 import Section from "@/features/layout/Section";
 export default async function Home() {
@@ -10,10 +11,13 @@ export default async function Home() {
         <HeroBanner />
       </Section>
       <Section>
-        <HomeFeaturesPreview />
+        <FeaturesSection />
       </Section>
       <Section>
         <InfiniteMovingCardsDemo />
+      </Section>
+      <Section>
+        <TypewriterEffectSmoothDemo />
       </Section>
     </Main>
   );

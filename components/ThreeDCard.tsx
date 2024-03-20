@@ -64,7 +64,7 @@ export function ThreeDCard({
               }}
               className="px-4 py-2 rounded-xl bg-primary  text-primary-foreground text-xs font-bold"
             >
-              Signin to use
+              Signup to use
             </CardItem>
           ) : (
             <CardItem
@@ -73,9 +73,9 @@ export function ThreeDCard({
               onClick={() => {
                 router.push(page);
               }}
-              className="px-4 py-2 rounded-xl bg-primary  text-secondary-foreground text-xs font-bold"
+              className="px-4 py-2 rounded-xl bg-primary  text-primary-foreground text-xs font-bold"
             >
-              Start to use
+              Start using
             </CardItem>
           )}
         </div>

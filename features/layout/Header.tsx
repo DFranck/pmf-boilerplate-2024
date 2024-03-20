@@ -15,7 +15,7 @@ import { ModeToggle } from "../theme/ModeToggle";
 const Header = () => {
   const { data: session } = useSession();
   return (
-    <header className=" p-2 border-b-2 border-primary">
+    <header className=" p-2 border-b border-border">
       <div className="flex justify-between max-w-7xl mx-auto">
         <Link className="rounded-full hover:opacity-80" href="/">
           <Image
@@ -34,7 +34,6 @@ const Header = () => {
               <DropdownMenuTrigger>
                 <Button variant={"default"} asChild>
                   <Link href="/user/profile">
-                    Bonjour{" "}
                     <b>
                       {session.user.username.slice(0, 1).toUpperCase() +
                         session.user.username.slice(1)}
@@ -43,11 +42,14 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => signOut()}>
-                  Deconnexion
-                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/user/profile">Mon profil</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => signOut()}
+                  className="cursor-pointer"
+                >
+                  Deconnexion
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -24,9 +24,7 @@ export function HeroBanner() {
       <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-seconary relative z-20">
         APP NAME
       </h1>
-      <h2 className="md:text-1xl text-1xl lg:text-4xl font-bold text-center text-seconary relative z-20">
-        App slogan
-      </h2>
+
       <div className="w-[40rem] h-40 relative">
         {/* Gradients */}
         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-primary to-transparent h-[2px] w-3/4 blur-sm" />
@@ -45,7 +43,10 @@ export function HeroBanner() {
         />
 
         {/* Radial Gradient to prevent sharp edges */}
-        <div className="absolute inset-0 flex justify-center items-center z-10">
+        <div className="absolute inset-0 flex flex-col justify-center items-center gap-5 z-10">
+          <h2 className="md:text-1xl text-1xl lg:text-4xl font-bold text-center text-seconary relative z-20">
+            App slogan
+          </h2>
           {!session?.user && (
             <Button asChild variant={"default"}>
               <Link href="/auth/signup">Signup</Link>
