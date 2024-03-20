@@ -84,6 +84,10 @@ export const CardBody = ({
 }) => {
   return (
     <div
+      style={{
+        background:
+          "linear-gradient(180deg, hsl(var(--card)), hsl(var(--accent)))",
+      }}
       className={cn(
         "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
         className
