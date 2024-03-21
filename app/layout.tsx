@@ -1,10 +1,10 @@
-import Providers from "@/app/providers";
 import Footer from "@/features/layout/Footer";
 import Header from "@/features/layout/Header";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
