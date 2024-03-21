@@ -47,9 +47,13 @@ export function HeroBanner() {
           <h2 className="md:text-1xl text-1xl lg:text-4xl font-bold text-center text-seconary relative z-20">
             App slogan
           </h2>
-          {!session?.user && (
+          {!session?.user ? (
             <Button asChild variant={"default"}>
               <Link href="/auth/signup">Signup</Link>
+            </Button>
+          ) : (
+            <Button asChild>
+              <Link href="/subscribe">Subscribe</Link>
             </Button>
           )}
         </div>

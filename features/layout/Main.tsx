@@ -1,8 +1,20 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
-const Main = ({ children }: { children: React.ReactNode }) => {
+const Main = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main
+      className={cn(
+        className,
+        "flex flex-col items-center justify-center h-full"
+      )}
+    >
       {children}
     </main>
   );

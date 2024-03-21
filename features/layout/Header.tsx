@@ -43,13 +43,16 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
-                  <Link href="/user/profile">Mon profil</Link>
+                  <Link href="/user/profile">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href="/subscribe">Subscribe / </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => signOut()}
                   className="cursor-pointer"
                 >
-                  Deconnexion
+                  Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

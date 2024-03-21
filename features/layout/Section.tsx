@@ -1,8 +1,20 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
-const Section = ({ children }: { children: React.ReactNode }) => {
+const Section = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <section className="w-full flex items-center justify-center flex-wrap">
+    <section
+      className={cn(
+        className,
+        "w-full flex items-center justify-center flex-wrap"
+      )}
+    >
       {children}
     </section>
   );
