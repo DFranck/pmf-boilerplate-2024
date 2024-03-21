@@ -81,16 +81,16 @@ const ResetPasswordForm = () => {
             });
           }
         })}
-        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-gray-100 rounded-lg p-8 "
+        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-accent text-accent-foreground rounded-lg p-8 "
       >
         <FormField
           name={"newPassword"}
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nouveau Password</FormLabel>
+              <FormLabel>New Password</FormLabel>
               <FormControl>
-                <Input type="password" {...field} />
+                <Input type="password" placeholder="New Password" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -102,7 +102,11 @@ const ResetPasswordForm = () => {
             <FormItem>
               <FormLabel>Confirm new password</FormLabel>
               <FormControl>
-                <Input type="password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Confirm new password"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}

@@ -51,7 +51,7 @@ const ForgotPasswordForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-gray-100 rounded-lg p-8 "
+        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-accent text-accent-foreground rounded-lg p-8 "
       >
         <FormField
           name="email"
@@ -60,7 +60,7 @@ const ForgotPasswordForm = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" {...field} />
+                <Input type="email" placeholder="Enter your Email" {...field} />
               </FormControl>
             </FormItem>
           )}

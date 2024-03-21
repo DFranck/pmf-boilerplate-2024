@@ -9,7 +9,7 @@ const SubButton = ({
   plan: PlanType;
 }) => {
   const handleClick = (plan: PlanType) => {
-    console.log(plan.price);
+    console.log("Logique de souscription ici :SubButton.tsx", plan.price);
   };
   return <Button onClick={() => handleClick(plan)}>{children}</Button>;
 };

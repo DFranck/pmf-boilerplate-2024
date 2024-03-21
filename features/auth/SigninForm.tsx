@@ -51,7 +51,7 @@ const SigninForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-gray-100 rounded-lg p-8 "
+        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-accent text-accent-foreground rounded-lg p-8 "
       >
         <FormField
           name="email"
@@ -82,7 +82,7 @@ const SigninForm = () => {
           )}
         />
         <Link
-          className="text-blue-500 w-full text-sm text-right"
+          className="text-blue-200 w-full text-sm text-right"
           href="/auth/forgot-password"
         >
           Password oublié?
@@ -92,7 +92,7 @@ const SigninForm = () => {
           className="text-gray-500 w-full text-sm text-right"
           href="/auth/signup"
         >
-          Create an account <b className="text-blue-500">Signup now</b>
+          Create an account <b className="text-blue-400">Signup now</b>
         </Link>
       </form>
     </Form>

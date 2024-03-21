@@ -58,16 +58,16 @@ const SignupForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-gray-100 rounded-lg p-8 "
+        className="flex flex-col max-w-md space-y-4 justify-center items-center bg-accent text-accent-foreground rounded-lg p-8 "
       >
         <FormField
           name="username"
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Surnom</FormLabel>
+              <FormLabel>Pseudo</FormLabel>
               <FormControl>
-                <Input placeholder="Entrer votre surnom" {...field} />
+                <Input placeholder="Entrer votre pseudo" {...field} />
               </FormControl>
             </FormItem>
           )}
