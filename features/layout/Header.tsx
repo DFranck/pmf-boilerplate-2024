@@ -46,7 +46,7 @@ const Header = () => {
                   <Link href="/user/profile">Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/subscribe">Subscribe / </Link>
+                  <Link href="/subscription">subscription / </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   onClick={() => signOut()}

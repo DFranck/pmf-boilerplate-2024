@@ -33,8 +33,8 @@ export const POST = async (req: Request) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:3000/subscribe/success",
-      cancel_url: "http://localhost:3000/subscribe/cancel",
+      success_url: "http://localhost:3000/subscription/success",
+      cancel_url: "http://localhost:3000/subscription/cancel",
     });
     console.log(stripSession.url);
 

@@ -53,7 +53,7 @@ export function HeroBanner() {
             </Button>
           ) : (
             <Button asChild>
-              <Link href="/subscribe">Subscribe</Link>
+              <Link href="/subscription">subscription</Link>
             </Button>
           )}
         </div>

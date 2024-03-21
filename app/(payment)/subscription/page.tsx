@@ -1,7 +1,6 @@
-import BuyButton from "@/features/cart/BuyButton";
-import SubscriptionCard from "@/features/cart/SubscriptionCard";
 import Main from "@/features/layout/Main";
 import Section from "@/features/layout/Section";
+import SubscriptionCard from "@/features/payment/SubscriptionCard";
 
 export type PlanType = {
   name: string;
@@ -41,9 +40,9 @@ export const plans = [
     mostPopular: false,
   },
 ];
-const Subscribe = () => {
+const subscription = () => {
   return (
-    <Main>
+    <Main className="h-full">
       <Section className="py-16 px-4">
         <h1 className="text-4xl font-bold text-center mb-8">
           Plans d&apos;abonnement
@@ -53,10 +52,9 @@ const Subscribe = () => {
             <SubscriptionCard key={plan.name} plan={plan} />
           ))}
         </div>
-        <BuyButton />
       </Section>
     </Main>
   );
 };
 
-export default Subscribe;
+export default subscription;

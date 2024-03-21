@@ -12,7 +12,7 @@ const Section = ({
     <section
       className={cn(
         className,
-        "w-full flex items-center justify-center flex-wrap"
+        "flex items-center justify-center flex-wrap w-full"
       )}
     >
       {children}

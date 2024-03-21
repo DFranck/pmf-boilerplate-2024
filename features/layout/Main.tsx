@@ -10,10 +10,7 @@ const Main = ({
 }) => {
   return (
     <main
-      className={cn(
-        className,
-        "flex flex-col items-center justify-center h-full"
-      )}
+      className={cn(className, "flex flex-col items-center justify-center")}
     >
       {children}
     </main>

@@ -1,4 +1,4 @@
-import { PlanType } from "@/app/(payment)/subscribe/page";
+import { PlanType } from "@/app/(payment)/subscription/page";
 import SubButton from "./SubButton";
 const SubscriptionCard = ({ plan }: { plan: PlanType }) => (
   <div

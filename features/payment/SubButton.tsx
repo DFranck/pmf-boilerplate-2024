@@ -1,5 +1,5 @@
 "use client";
-import { PlanType } from "@/app/(payment)/subscribe/page";
+import { PlanType } from "@/app/(payment)/subscription/page";
 import { Button } from "@/components/ui/button";
 const SubButton = ({
   children,
