@@ -31,7 +31,7 @@ export function TypewriterEffectSmoothDemo() {
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
         <Button variant="outline" className="w-40 h-10 rounded-xl text-sm">
-          <Link href={"mailto:qS3pG@example.com"}>Contact us</Link>
+          <Link href={"/about"}>About us</Link>
         </Button>
         {!session?.user ? (
           <Button className="w-40 h-10 rounded-xl  border text-sm" asChild>
