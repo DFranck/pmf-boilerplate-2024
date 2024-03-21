@@ -1,4 +1,5 @@
 import prisma from "@/lib/prisma";
+import { findUserFormCustomerId } from "@/lib/stripe";
 import Stripe from "stripe";
 export const POST = async (req: Request) => {
   const body = (await req.json()) as Stripe.Event;
@@ -83,17 +84,6 @@ export const POST = async (req: Request) => {
     }
   }
   return new Response(JSON.stringify({ message: "Success" }), { status: 200 });
-};
-
-export const findUserFormCustomerId = async (stripeCustomerId: unknown) => {
-  if (typeof stripeCustomerId !== "string") {
-    return null;
-  }
-  return prisma.user.findFirst({
-    where: {
-      stripeCustomerId,
-    },
-  });
 };
 
 export const GET = async () => {
