@@ -9,6 +9,10 @@ import { SparklesCore } from "./ui/sparkles";
 
 export function HeroBanner() {
   const { data: session } = useSession();
+  if (!session) {
+    console.log("no session");
+  }
+
   const { theme, systemTheme } = useTheme();
   const [particleColor, setParticleColor] = useState("#ffffff");
 
@@ -63,8 +67,8 @@ export function HeroBanner() {
         <Image
           src="/hero-background.webp"
           alt="Background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={100}
         />
       </div>

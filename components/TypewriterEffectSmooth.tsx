@@ -5,6 +5,10 @@ import { Button } from "./ui/button";
 import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 export function TypewriterEffectSmoothDemo() {
   const { data: session } = useSession();
+  if (!session) {
+    console.log("no session");
+  }
+
   const words = [
     {
       text: "Text",

@@ -14,6 +14,13 @@ import { ModeToggle } from "../theme/ModeToggle";
 
 const Header = () => {
   const { data: session } = useSession();
+  // console.log(session);
+  if (!session) {
+    console.log("no session");
+  } else {
+    console.log(session);
+  }
+
   return (
     <header className=" p-2 border-b border-border">
       <div className="flex justify-between max-w-7xl mx-auto">

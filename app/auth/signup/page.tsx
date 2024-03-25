@@ -1,8 +1,10 @@
 import SignupForm from "@/features/auth/SignupForm";
-import { getServerSession } from "next-auth";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 const Signup = async () => {
-  const session = await getServerSession();
+  const session = await auth();
+  console.log(session);
+
   if (session) {
     return redirect("/");
   }

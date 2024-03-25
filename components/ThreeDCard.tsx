@@ -20,6 +20,9 @@ export function ThreeDCard({
   page: string;
 }) {
   const { data: session } = useSession();
+  if (!session) {
+    console.log("no session");
+  }
   const router = useRouter();
   return (
     <CardContainer className="inter-var">

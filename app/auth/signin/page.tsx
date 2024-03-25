@@ -3,8 +3,12 @@ import { auth } from "@/lib/auth";
 
 const Signin = async () => {
   // const session = await getServerSession();
-  const session = auth();
-  console.log(session);
+  const session = await auth();
+  if (!session) {
+    console.log("SESSION NO EXISTE", session);
+  } else {
+    console.log("SESSION EXISTE", session);
+  }
 
   // if (session) {
   //   redirect("/");
