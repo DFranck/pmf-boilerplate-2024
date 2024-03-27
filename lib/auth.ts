@@ -4,8 +4,8 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 // import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-
+// import CredentialsProvider from "next-auth/providers/credentials";
+import Credentials from "@auth/core/providers/credentials";
 interface loggedUser {
   id: string;
   email: string;
@@ -23,7 +23,7 @@ export const {
     //   clientId: process.env.GOOGLE_CLIENT_ID,
     //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // }),
-    CredentialsProvider({
+    Credentials({
       // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
       // `credentials` is used to generate a form on the sign in page.
